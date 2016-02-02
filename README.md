@@ -1,2 +1,5 @@
-# rust-stock-technicals
+# Stock Technicals 
+
 Stock Technical Indicators and Overlays
+
+  
