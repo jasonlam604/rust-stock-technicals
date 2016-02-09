@@ -1,7 +1,14 @@
-
-// Typical Price (TP) = (High + Low + Close)/3
-
-pub fn execute(high: &Vec<f64>, low: &Vec<f64>, close: &Vec<f64>) -> Vec<f64> {
+/// Constructs a new 'Vec<f32>' where each element contains calculated
+/// typical price.  Formula:  Typical Price (TP) = (High + Low + Close) / 3
+///
+/// # Examples
+///
+/// '''
+/// use rust_stock_technicals::indicators::typical_price
+///
+/// let typical_prices = typical_price::execute(&high,&low,&close);
+/// '''
+pub fn execute(high: &Vec<f32>, low: &Vec<f32>, close: &Vec<f32>) -> Vec<f32> {
 
 	if  high.len() != low.len() || high.len() != close.len() {
 		panic!("Mismatching array size");
@@ -10,7 +17,7 @@ pub fn execute(high: &Vec<f64>, low: &Vec<f64>, close: &Vec<f64>) -> Vec<f64> {
 	let mut tp = vec![];
 	
 	for i in 0..high.len() {
-		let val : f64 = (high[i] + low[i] + close[i]) / 3.0;
+		let val : f32 = (high[i] + low[i] + close[i]) / 3.0;
         tp.push( val );
     }
 	
@@ -31,9 +38,11 @@ mod test {
     		
     	let typical_prices = execute(&high,&low,&close);
     	
-    	//println!("Value ================> {}",typical_prices[0]);
-    	
-        assert!(typical_prices[0] == 23.98);
-     
+        assert_eq!( (format!("{:.2}",typical_prices[0])).parse::<f32>().unwrap(),23.98);
+        assert_eq!( (format!("{:.2}",typical_prices[1])).parse::<f32>().unwrap(),23.91);
+        assert_eq!( (format!("{:.2}",typical_prices[2])).parse::<f32>().unwrap(),23.78);
+        assert_eq!( (format!("{:.2}",typical_prices[3])).parse::<f32>().unwrap(),23.67);
+        assert_eq!( (format!("{:.2}",typical_prices[4])).parse::<f32>().unwrap(),23.54);
+        assert_eq!( (format!("{:.2}",typical_prices[5])).parse::<f32>().unwrap(),23.36);
     }
 }
